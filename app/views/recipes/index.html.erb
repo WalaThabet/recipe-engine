@@ -1,29 +1,39 @@
-<h1>Recipes</h1>
+<!-- app/views/recipes/index.html.erb -->
+<h1 class="text-3xl font-semibold mb-6 text-center">Recipes</h1>
 
-<%= paginate @recipes %>
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- Categories or Filters (if you want to implement filtering) -->
+  <div class="flex items-center justify-center py-4 md:py-8 flex-wrap gap-3">
+    <!-- Category buttons -->
+    <button type="button" class="text-blue-700 ...">All categories</button>
+    <!-- Add more buttons for each category if needed -->
+  </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Cook Time</th>
-      <th>Prep Time</th>
-      <th>Ratings</th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
+  <!-- Recipes Grid -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
     <% @recipes.each do |recipe| %>
-      <tr>
-        <td><%= recipe.title %></td>
-        <td><%= recipe.cook_time %></td>
-        <td><%= recipe.prep_time %></td>
-        <td><%= recipe.ratings %></td>
-        <td><%= link_to 'Show', recipe %></td>
-      </tr>
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <% if recipe.image.present? %>
+          <img class="h-48 w-full object-cover" src="<%= recipe.image %>" alt="<%= recipe.title %>">
+        <% end %>
+        <div class="p-4">
+          <h5 class="text-lg font-bold mb-2"><%= recipe.title %></h5>
+          <div class="text-gray-700 text-base mb-4">
+            <p>Cook Time: <%= recipe.cook_time %> minutes</p>
+            <p>Prep Time: <%= recipe.prep_time %> minutes</p>
+            <p>Ratings: <%= recipe.ratings %></p>
+            <p>Cuisine: <%= recipe.cuisine %></p>
+            <p>Category: <%= recipe.category %></p>
+            <p>Author: <%= recipe.author %></p>
+          </div>
+          <%= link_to 'Show', recipe, class: "text-white bg-blue-600 hover:bg-blue-700 rounded-full px-5 py-2.5 text-center" %>
+        </div>
+      </div>
     <% end %>
-  </tbody>
-</table>
+  </div>
 
-<%= paginate @recipes %>
+  <!-- Pagination -->
+  <div class="mt-8">
+    <%= paginate @recipes %>
+  </div>
+</div>
