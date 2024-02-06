@@ -14,8 +14,11 @@ gem "pg", "~> 1.1"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
-gem 'webpacker', '~> 5.x'
+gem 'webpacker'
 gem 'react-rails'
+gem 'jsonapi-serializer'
+gem 'kaminari'
+
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem "jsbundling-rails"
 
