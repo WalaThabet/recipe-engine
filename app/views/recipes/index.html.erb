@@ -1,5 +1,6 @@
-<h1 class="text-3xl font-semibold mb-6 text-center">Recipes</h1>
 
+<h1 class="text-3xl font-semibold mb-6 text-center">Recipes</h1>
+  <!-- ... Search Form ... -->
 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
   <%= form_with(url: recipes_path, method: :get, local: true, class: "mb-6") do %>
     <div class="flex flex-wrap justify-between items-end">
@@ -12,32 +13,44 @@
       }, params[:search_by]), id: "search_by_dropdown", class: "rounded-lg focus:ring-blue-500 bg-gray-50 focus:border-blue-500  w-full p-2.5 " %>
 
       <!-- Search input field -->
-      <%= search_field_tag :search, params[:search], id: "default-search", class: "block w-full p-2.5 text-sm bg-gray-50 rounded-lg border  focus:ring-blue-500 focus:border-blue-500  dark:border-gray-600", placeholder: "Enter search term...", required: true %>
+      <%= search_field_tag :search, params[:search], id: "default-search", class: "block w-full p-2.5 text-sm bg-gray-50 rounded-lg  focus:ring-blue-500 focus:border-blue-500  dark:border-gray-600", placeholder: "Enter search term...", required: true %>
     </div>
   <% end %>
-
   <!-- Recipes Grid -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-    <% @recipes.each do |recipe| %>
-      <div class="bg-white rounded-lg shadow-md overflow-hidden">
-        <% if recipe.image.present? %>
-          <img class="h-48 w-full object-cover" src="<%= recipe.image %>" alt="<%= recipe.title %>">
-        <% end %>
-        <div class="p-4">
-          <h5 class="text-lg font-bold mb-2"><%= recipe.title %></h5>
-          <div class="text-gray-700 text-base mb-4">
-            <p>Cook Time: <%= recipe.cook_time %> minutes</p>
-            <p>Prep Time: <%= recipe.prep_time %> minutes</p>
-            <p>Ratings: <%= recipe.ratings %></p>
-            <p>Cuisine: <%= recipe.cuisine %></p>
-            <p>Category: <%= recipe.category %></p>
-            <p>Author: <%= recipe.author %></p>
-          </div>
-        <%= link_to 'Show', recipe_path(recipe), class: "text-white bg-blue-600 hover:bg-blue-700 rounded-full px-5 py-2.5 text-center" %>
+<div class="grid grid-cols-4 md:grid-cols-3 gap-x-2 gap-y-2">
+  <% @recipes.each do |recipe| %>
+    <div class="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl" style="height: 100%;"> <!-- Set a specific height or make sure it's relative to the container -->
+      <% if recipe.image.present? %>
+        <div class="relative overflow-hidden rounded-xl h-80">
+          <img src="<%= recipe.image %>" alt="<%= recipe.title %>" class="w-full h-full object-cover" />
         </div>
+      <% end %>
+      <div class="flex-grow p-6 text-center">
+        <h4 class="block mb-2 font-sans text-2xl font-semibold leading-snug tracking-normal text-blue-gray-900">
+          <%= recipe.title %>
+        </h4>
+     <div class="flex justify-center mb-4">
+        <% 5.times do |i| %>
+          <% if i < recipe.ratings %>
+            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <title>Full star</title>
+              <path d="M9.049 2.927c.396-1.104 1.954-1.104 2.35 0l1.615 4.507a1 1 0 00.95.691h4.686c1.161 0 1.639 1.518.79 2.302l-3.787 3.682a1 1 0 00-.29.885l1.42 4.567c.219.707-.57 1.26-1.18.88l-4.038-2.6a1 1 0 00-1.116 0l-4.038 2.6c-.61.38-1.4-.173-1.18-.88l1.42-4.567a1 1 0 00-.29-.885l-3.787-3.682c-.85-.784-.37-2.302.79-2.302h4.686a1 1 0 00.95-.691l1.615-4.507z" />
+            </svg>
+          <% else %>
+            <svg class="w-5 h-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <title>Empty star</title>
+              <path d="M9.049 2.927c.396-1.104 1.954-1.104 2.35 0l1.615 4.507a1 1 0 00.95.691h4.686c1.161 0 1.639 1.518.79 2.302l-3.787 3.682a1 1 0 00-.29.885l1.42 4.567c.219.707-.57 1.26-1.18.88l-4.038-2.6a1 1 0 00-1.116 0l-4.038 2.6c-.61.38-1.4-.173-1.18-.88l1.42-4.567a1 1 0 00-.29-.885l-3.787-3.682c-.85-.784-.37-2.302.79-2.302h4.686a1 1 0 00.95-.691l1.615-4.507z" />
+            </svg>
+          <% end %>
+        <% end %>
       </div>
-    <% end %>
-  </div>
+      </div>
+      <div class="mt-auto">
+        <%= link_to 'Show', recipe_path(recipe), class: "block w-full text-center text-white bg-blue-600 hover:bg-blue-700 rounded-b-xl px-5 py-2.5" %>
+      </div>
+    </div>
+  <% end %>
+</div>
 
   <!-- Pagination -->
   <div class="mt-8">
