@@ -99,6 +99,7 @@ GEM
       activesupport (>= 6.1)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
+    innertube (1.1.0)
     io-console (0.7.2)
     irb (1.11.1)
       rdoc
@@ -106,6 +107,8 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    joiner (0.6.0)
+      activerecord (>= 6.1.0)
     jsbundling-rails (1.3.0)
       railties (>= 6.0.0)
     jsonapi-serializer (2.2.0)
@@ -133,9 +136,11 @@ GEM
     marcel (1.0.2)
     matrix (0.4.2)
     method_source (1.0.0)
+    middleware (0.1.0)
     mini_mime (1.1.5)
     minitest (5.22.0)
     msgpack (1.7.2)
+    mysql2 (0.5.5)
     net-imap (0.4.10)
       date
       net-protocol
@@ -212,6 +217,7 @@ GEM
     reline (0.4.2)
       io-console (~> 0.5)
     rexml (3.2.6)
+    riddle (2.4.3)
     rubyzip (2.3.2)
     selenium-webdriver (4.17.0)
       base64 (~> 0.2)
@@ -241,6 +247,13 @@ GEM
       railties (>= 6.0.0)
     tailwindcss-rails (2.3.0-x86_64-linux)
       railties (>= 6.0.0)
+    thinking-sphinx (5.5.1)
+      activerecord (>= 4.2.0)
+      builder (>= 2.1.2)
+      innertube (>= 1.0.2)
+      joiner (>= 0.3.4)
+      middleware (>= 0.1.0)
+      riddle (~> 2.3)
     thor (1.3.0)
     tilt (2.3.0)
     timeout (0.4.1)
@@ -284,6 +297,7 @@ DEPENDENCIES
   jsbundling-rails
   jsonapi-serializer
   kaminari
+  mysql2
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.8)
@@ -293,6 +307,7 @@ DEPENDENCIES
   sprockets-rails
   stimulus-rails
   tailwindcss-rails (~> 2.3)
+  thinking-sphinx
   turbo-rails
   tzinfo-data
   web-console

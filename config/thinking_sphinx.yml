@@ -1,0 +1,10 @@
+test:
+  mysql41: 9308
+  dict: keywords
+
+development:
+  mysql41: 9306
+  dict: keywords
+
+production:
+  dict: keywords
