@@ -12,26 +12,36 @@
     <h5 class="block font-sans text-xl antialiased font-medium leading-snug tracking-normal text-blue-gray-900">
       <%= @recipe.title %>
     </h5>
+        <br>
     <p>
       <strong>Cook Time:</strong>
       <%= @recipe.cook_time %> minutes
     </p>
+        <br>
     <p>
       <strong>Prep Time:</strong>
       <%= @recipe.prep_time %> minutes
     </p>
+        <br>
+        <p>
+      <strong>Author:</strong>
+      <%= @recipe.author %>
+    </p>
+        <br>
     <p>
       <strong>Ratings:</strong>
       <%= @recipe.ratings %>
     </p>
     <p>
+    <br>
       <strong>Ingredients:</strong>
     </p>
+        <br>
     <ul class="divide-y divide-gray-200 mb-4">
       <% @recipe.ingredients.each do |ingredient| %>
         <li class="py-2"><%= ingredient.name %></li>
       <% end %>
     </ul>
-    <%= link_to 'Back', recipes_path, class: "mt-auto block w-full text-center text-white bg-blue-600 hover:bg-blue-700 rounded-b-xl px-5 py-2.5" %>
+    <%= link_to 'Back', recipes_path, class: "flex w-full justify-center rounded-md bg-pink-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
   </div>
 </div>
