@@ -108,6 +108,8 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    dockerfile-rails (1.6.5)
+      rails (>= 3.0.0)
     erb_lint (0.5.0)
       activesupport
       better_html (>= 2.0.1)
@@ -353,6 +355,7 @@ DEPENDENCIES
   capybara
   debug
   devise (~> 4.9)
+  dockerfile-rails (>= 1.6)
   erb_lint
   htmlbeautifier
   jbuilder

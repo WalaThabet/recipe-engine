@@ -66,3 +66,5 @@ gem 'htmlbeautifier'
 gem 'rubocop'
 gem 'rubocop-capybara'
 gem 'rubocop-rails'
+
+gem "dockerfile-rails", ">= 1.6", :group => :development
