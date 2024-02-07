@@ -59,3 +59,5 @@ gem "tailwindcss-rails", "~> 2.3"
 
 gem 'thinking-sphinx'
 gem 'mysql2'
+
+gem "devise", "~> 4.9"

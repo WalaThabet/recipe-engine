@@ -1,5 +1,6 @@
-# app/controllers/recipes_controller.rb
 class RecipesController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     if params[:search].present?
       # Determine the attribute to search by
