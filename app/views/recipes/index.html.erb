@@ -1,22 +1,36 @@
 
 <br>  <!-- ... Search Form ... -->
 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-  <%= form_with(url: recipes_path, method: :get, local: true, class: "mb-6") do %>
-    <div class="flex flex-wrap justify-between items-end">
-      <!-- Dropdown for selecting the search attribute -->
-      <%= select_tag "search_by", options_for_select({
-        'Title' => 'title',
-        'Cuisine' => 'cuisine',
-        'Category' => 'category',
-        'Author' => 'author'
-      }, params[:search_by]), id: "search_by_dropdown", class: "rounded-lg focus:ring-blue-500 bg-gray-50 focus:border-blue-500  w-full p-2.5 " %>
+<%= form_with(url: recipes_path, method: :get, local: true, class: "mb-6") do %>
+  <div class="flex">
 
-      <!-- Search input field -->
-      <%= search_field_tag :search, params[:search], id: "default-search", class: "block w-full p-2.5 text-sm bg-gray-50 rounded-lg  focus:ring-blue-500 focus:border-blue-500  dark:border-gray-600", placeholder: "Enter search term...", required: true %>
+    <!-- Hidden field for storing the selected dropdown value -->
+    <%= hidden_field_tag :search_by, params[:search_by].presence || 'Title', id: "selected_search_by" %>
+
+    <!-- Dropdown button -->
+<button id="dropdown-button" data-dropdown-toggle="dropdown" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">
+  <%= params[:search_by] || 'Title' %>
+  <!-- SVG icon -->
+</button>
+
+    <!-- Dropdown menu -->
+    <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+      <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
+        <% { 'Title' => 'title', 'Cuisine' => 'cuisine', 'Category' => 'category', 'Author' => 'author', 'Ingredients' => 'ingredients' }.each do |key, value| %>
+          <li>
+            <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" onclick="selectDropdownOption('<%= value %>')"><%= key %></button>
+          </li>
+        <% end %>
+      </ul>
     </div>
-  <% end %>
+
+    <!-- Search input field -->
+<%= search_field_tag :search, params[:search], id: "search-dropdown", class: "block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500", placeholder: "Search by #{(params[:search_by].presence || 'title').capitalize}...", required: true %>
+  </div>
+<% end %>
+
   <!-- Recipes Grid -->
-<div class="grid grid-cols-4 md:grid-cols-3 gap-x-2 gap-y-2">
+<div class="grid grid-cols-4 md:grid-cols-3 gap-x-3 gap-y-3">
   <% @recipes.each do |recipe| %>
     <div class="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl" style="height: 100%;"> <!-- Set a specific height or make sure it's relative to the container -->
       <% if recipe.image.present? %>
@@ -57,10 +71,68 @@
   </div>
 </div>
 <script>
-  function handleInput() {
-    var searchInput = document.getElementById('default-search');
-    if (!searchInput.value) {
-      searchInput.form.submit();
+  document.addEventListener('DOMContentLoaded', function() {
+    var searchInput = document.getElementById('search-dropdown');
+
+    // Add an 'input' event listener to the search input field
+    searchInput.addEventListener('input', function() {
+      // Check if the input field is empty
+      if (searchInput.value === '') {
+        clearSearch(); // Call the clearSearch function
+      }
+    });
+  });
+
+  function clearSearch() {
+    // Reset the 'search_by' field to its default value
+    var searchBySelect = document.getElementById('selected_search_by');
+    if (searchBySelect) {
+      searchBySelect.value = 'title';
+    }
+
+    // Update the dropdown button text
+    var dropdownButton = document.getElementById('dropdown-button');
+    if (dropdownButton) {
+      dropdownButton.textContent = 'Title';
+    }
+
+    // Clear the search input
+    var searchInput = document.getElementById('search-dropdown');
+    if (searchInput) {
+      searchInput.value = '';
+    }
+
+    // Submit the form
+    var form = document.querySelector('form');
+    if (form) {
+      form.submit();
     }
   }
+  // Function to handle dropdown option selection
+  window.selectDropdownOption = function(value) {
+    // Update the value of the hidden field
+    document.getElementById('selected_search_by').value = value;
+
+    // Update the button text
+    var button = document.getElementById('dropdown-button');
+    button.textContent = value.charAt(0).toUpperCase() + value.slice(1);
+
+    // Update the placeholder text of the search input
+    var searchInput = document.getElementById('search-dropdown');
+    var newPlaceholder = "Search by " + value.charAt(0).toUpperCase() + value.slice(1) + "...";
+    searchInput.setAttribute('placeholder', newPlaceholder);
+
+    // Hide the dropdown
+    document.getElementById('dropdown').classList.add('hidden');
+  }
+
+  // This code will run when the DOM is fully loaded
+  document.addEventListener('DOMContentLoaded', function() {
+    // Check if params[:search_by] is set and update the placeholder accordingly
+    var searchBy = document.getElementById('selected_search_by').value;
+    var searchInput = document.getElementById('search-dropdown');
+    if(searchBy) {
+      searchInput.setAttribute('placeholder', "Search by " + searchBy.charAt(0).toUpperCase() + searchBy.slice(1) + "...");
+    }
+  });
 </script>
