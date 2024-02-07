@@ -11,9 +11,10 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body>
-    <main>
-      <%= yield %>
-    </main>
-  </body>
+...
+<body>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+  <%= yield %>
+</body>
 </html>
