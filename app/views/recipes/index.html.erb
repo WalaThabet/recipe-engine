@@ -1,69 +1,64 @@
 
 <br>  <!-- ... Search Form ... -->
 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-<%= form_with(url: recipes_path, method: :get, local: true, class: "mb-6") do %>
-  <div class="flex">
-
-    <!-- Hidden field for storing the selected dropdown value -->
-    <%= hidden_field_tag :search_by, params[:search_by].presence || 'Title', id: "selected_search_by" %>
-
-    <!-- Dropdown button -->
-<button id="dropdown-button" data-dropdown-toggle="dropdown" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">
-  <%= params[:search_by] || 'Title' %>
-  <!-- SVG icon -->
-</button>
-
-    <!-- Dropdown menu -->
-    <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-      <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
-        <% { 'Title' => 'title', 'Cuisine' => 'cuisine', 'Category' => 'category', 'Author' => 'author', 'Ingredients' => 'ingredients' }.each do |key, value| %>
-          <li>
-            <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" onclick="selectDropdownOption('<%= value %>')"><%= key %></button>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-
-    <!-- Search input field -->
-<%= search_field_tag :search, params[:search], id: "search-dropdown", class: "block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500", placeholder: "Search by #{(params[:search_by].presence || 'title').capitalize}...", required: true %>
-  </div>
-<% end %>
-
-  <!-- Recipes Grid -->
-<div class="grid grid-cols-4 md:grid-cols-3 gap-x-3 gap-y-3">
-  <% @recipes.each do |recipe| %>
-    <div class="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl" style="height: 100%;"> <!-- Set a specific height or make sure it's relative to the container -->
-      <% if recipe.image.present? %>
-        <div class="relative overflow-hidden rounded-xl h-80">
-          <img src="<%= recipe.image %>" alt="<%= recipe.title %>" class="w-full h-full object-cover" />
-        </div>
-      <% end %>
-      <div class="flex-grow p-6 text-center">
-        <h4 class="block mb-2 font-sans text-2xl font-semibold leading-snug tracking-normal text-blue-gray-900">
-          <%= recipe.title %>
-        </h4>
-     <div class="flex justify-center mb-4">
-        <% 5.times do |i| %>
-          <% if i < recipe.ratings %>
-            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-              <title>Full star</title>
-              <path d="M9.049 2.927c.396-1.104 1.954-1.104 2.35 0l1.615 4.507a1 1 0 00.95.691h4.686c1.161 0 1.639 1.518.79 2.302l-3.787 3.682a1 1 0 00-.29.885l1.42 4.567c.219.707-.57 1.26-1.18.88l-4.038-2.6a1 1 0 00-1.116 0l-4.038 2.6c-.61.38-1.4-.173-1.18-.88l1.42-4.567a1 1 0 00-.29-.885l-3.787-3.682c-.85-.784-.37-2.302.79-2.302h4.686a1 1 0 00.95-.691l1.615-4.507z" />
-            </svg>
-          <% else %>
-            <svg class="w-5 h-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-              <title>Empty star</title>
-              <path d="M9.049 2.927c.396-1.104 1.954-1.104 2.35 0l1.615 4.507a1 1 0 00.95.691h4.686c1.161 0 1.639 1.518.79 2.302l-3.787 3.682a1 1 0 00-.29.885l1.42 4.567c.219.707-.57 1.26-1.18.88l-4.038-2.6a1 1 0 00-1.116 0l-4.038 2.6c-.61.38-1.4-.173-1.18-.88l1.42-4.567a1 1 0 00-.29-.885l-3.787-3.682c-.85-.784-.37-2.302.79-2.302h4.686a1 1 0 00.95-.691l1.615-4.507z" />
-            </svg>
+  <%= form_with(url: recipes_path, method: :get, local: true, class: "mb-6") do %>
+    <div class="flex">
+      <!-- Hidden field for storing the selected dropdown value -->
+        <%= hidden_field_tag :search_by, params[:search_by].presence || 'title', id: "selected_search_by" %>
+      <!-- Dropdown button -->
+      <button id="dropdown-button" data-dropdown-toggle="dropdown" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">
+        <%= params[:search_by] || 'Title' %>
+      </button>
+      <!-- Dropdown menu -->
+      <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
+          <% { 'Title' => 'title', 'Cuisine' => 'cuisine', 'Category' => 'category', 'Author' => 'author', 'Ingredients' => 'ingredients' }.each do |key, value| %>
+            <li>
+              <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" onclick="selectDropdownOption('<%= value %>')"><%= key %></button>
+            </li>
           <% end %>
-        <% end %>
+        </ul>
       </div>
-      </div>
-      <div class="mt-auto">
-        <%= link_to 'Show', recipe_path(recipe), class: "block w-full text-center text-white bg-pink-600 hover:bg-blue-700 rounded-b-xl px-5 py-2.5" %>
-      </div>
+      <!-- Search input field -->
+      <%= search_field_tag :search, params[:search], id: "search-dropdown", class: "block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500", placeholder: "Search by #{(params[:search_by].presence || 'title').capitalize}..." %>
     </div>
-  <% end %>
-</div>
+  <br>
+  <!-- Recipes Grid -->
+  <div class="grid grid-cols-4 md:grid-cols-3 gap-x-3 gap-y-3">
+    <% @recipes.each do |recipe| %>
+      <div class="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl" style="height: 100%;"> <!-- Set a specific height or make sure it's relative to the container -->
+        <% if recipe.image.present? %>
+          <div class="relative overflow-hidden rounded-xl h-80">
+            <img src="<%= recipe.image %>" alt="<%= recipe.title %>" class="w-full h-full object-cover">
+          </div>
+        <% end %>
+        <div class="flex-grow p-6 text-center">
+          <h4 class="block mb-2 font-sans text-2xl font-semibold leading-snug tracking-normal text-blue-gray-900">
+            <%= recipe.title %>
+          </h4>
+      <div class="flex justify-center mb-4">
+          <% 5.times do |i| %>
+            <% if i < recipe.ratings %>
+              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <title>Full star</title>
+                <path d="M9.049 2.927c.396-1.104 1.954-1.104 2.35 0l1.615 4.507a1 1 0 00.95.691h4.686c1.161 0 1.639 1.518.79 2.302l-3.787 3.682a1 1 0 00-.29.885l1.42 4.567c.219.707-.57 1.26-1.18.88l-4.038-2.6a1 1 0 00-1.116 0l-4.038 2.6c-.61.38-1.4-.173-1.18-.88l1.42-4.567a1 1 0 00-.29-.885l-3.787-3.682c-.85-.784-.37-2.302.79-2.302h4.686a1 1 0 00.95-.691l1.615-4.507z" />
+              </svg>
+            <% else %>
+              <svg class="w-5 h-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <title>Empty star</title>
+                <path d="M9.049 2.927c.396-1.104 1.954-1.104 2.35 0l1.615 4.507a1 1 0 00.95.691h4.686c1.161 0 1.639 1.518.79 2.302l-3.787 3.682a1 1 0 00-.29.885l1.42 4.567c.219.707-.57 1.26-1.18.88l-4.038-2.6a1 1 0 00-1.116 0l-4.038 2.6c-.61.38-1.4-.173-1.18-.88l1.42-4.567a1 1 0 00-.29-.885l-3.787-3.682c-.85-.784-.37-2.302.79-2.302h4.686a1 1 0 00.95-.691l1.615-4.507z" />
+              </svg>
+            <% end %>
+          <% end %>
+        </div>
+        </div>
+        <div class="mt-auto">
+          <%= link_to 'Show', recipe_path(recipe), class: "block w-full text-center text-white bg-pink-600 hover:bg-blue-700 rounded-b-xl px-5 py-2.5" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+    <% end %>
 
   <!-- Pagination -->
   <div class="mt-8">
@@ -71,18 +66,6 @@
   </div>
 </div>
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var searchInput = document.getElementById('search-dropdown');
-
-    // Add an 'input' event listener to the search input field
-    searchInput.addEventListener('input', function() {
-      // Check if the input field is empty
-      if (searchInput.value === '') {
-        clearSearch(); // Call the clearSearch function
-      }
-    });
-  });
-
   function clearSearch() {
     // Reset the 'search_by' field to its default value
     var searchBySelect = document.getElementById('selected_search_by');
