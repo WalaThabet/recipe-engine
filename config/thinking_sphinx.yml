@@ -1,10 +1,11 @@
 test:
   mysql41: 9308
-  dict: keywords
+  min_infix_len: 1
 
 development:
   mysql41: 9306
-  dict: keywords
+  min_infix_len: 1
+  enable_star: 1
 
 production:
   dict: keywords

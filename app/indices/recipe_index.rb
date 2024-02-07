@@ -6,5 +6,5 @@ ThinkingSphinx::Index.define :recipe, with: :real_time do
   indexes cuisine
   indexes category
   indexes author
-  indexes ingredients.name, as: :ingredient_names
+  indexes ingredients.name, as: :ingredient_names, type: :string
 end
