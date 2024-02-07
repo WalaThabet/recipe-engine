@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   devise_for :users
-    resources :recipes, only: [:index, :show]
+  resources :recipes, only: %i[index show]
 
-  root "recipes#index"
+  root 'recipes#index'
 end

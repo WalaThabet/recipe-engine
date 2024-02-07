@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # app/serializers/recipe_serializer.rb
 class RecipeSerializer
   include JSONAPI::Serializer

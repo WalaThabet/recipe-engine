@@ -1,6 +1,8 @@
-ThinkingSphinx::Index.define :recipe, :with => :real_time do
+# frozen_string_literal: true
+
+ThinkingSphinx::Index.define :recipe, with: :real_time do
   # fields
-  indexes title, :sortable => true
+  indexes title, sortable: true
   indexes cuisine
   indexes category
   indexes author
