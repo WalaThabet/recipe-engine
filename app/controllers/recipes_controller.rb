@@ -11,7 +11,7 @@ class RecipesController < ApplicationController
       case search_by
       when 'title', 'cuisine', 'category', 'author'
         @recipes = Recipe.search(escaped_search, conditions: { search_by => params[:search] },
-                                                    page: params[:page], per_page: 10)
+                                                 page: params[:page], per_page: 10)
       when 'ingredients'
         @recipes = Recipe.search("*#{escaped_search}*", page: params[:page], per_page: 10)
       end
