@@ -17,7 +17,7 @@ worker_timeout 3600 if ENV.fetch('RAILS_ENV', 'development') == 'development'
 
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
 #
-port ENV.fetch('PORT', 3000)
+port ENV.fetch("PORT", 3000)
 
 # Specifies the `environment` that Puma will run in.
 #
@@ -25,6 +25,8 @@ environment ENV.fetch('RAILS_ENV', 'development')
 
 # Specifies the `pidfile` that Puma will use.
 pidfile ENV.fetch('PIDFILE', 'tmp/pids/server.pid')
+
+bind "tcp://0.0.0.0:#{ENV.fetch('PORT', 3000)}"
 
 # Specifies the number of `workers` to boot in clustered mode.
 # Workers are forked web server processes. If using threads and workers together
