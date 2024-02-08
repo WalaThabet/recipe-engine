@@ -392,7 +392,6 @@ DEPENDENCIES
   devise (~> 4.9)
   dockerfile-rails (>= 1.6)
   erb_lint
-  factory_bot (~> 6.4)
   factory_bot_rails
   faker
   htmlbeautifier
