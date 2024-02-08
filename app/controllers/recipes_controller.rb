@@ -22,5 +22,7 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    record_not_found
   end
 end

@@ -1,6 +1,8 @@
 test:
   mysql41: 9308
   min_infix_len: 1
+  real_time_callbacks: false
+
 
 development:
   mysql41: 9306

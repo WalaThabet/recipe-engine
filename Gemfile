@@ -43,7 +43,15 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'bootsnap', require: false
 
 group :development, :test do
-  gem 'debug', platforms: %i[mri mingw x64_mingw]
+  gem 'byebug', platform: :mri
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'pry'
+  gem 'rspec-rails', '~> 3.5'
+  gem 'rubocop-factory_bot'
+  gem 'rubocop-rspec'
 end
 
 group :development do
@@ -51,8 +59,10 @@ group :development do
 end
 
 group :test do
-  gem 'capybara'
+  gem 'faker'
+  gem 'rails-controller-testing'
   gem 'selenium-webdriver'
+  gem 'shoulda-matchers'
 end
 
 gem 'tailwindcss-rails', '~> 2.3'
@@ -67,4 +77,6 @@ gem 'rubocop'
 gem 'rubocop-capybara'
 gem 'rubocop-rails'
 
-gem "dockerfile-rails", ">= 1.6", :group => :development
+gem 'dockerfile-rails', '>= 1.6', group: :development
+
+gem 'factory_bot', '~> 6.4'
