@@ -11,3 +11,6 @@ development:
 
 production:
   dict: keywords
+  mysql41: <%= ENV['FLYING_SPHINX_PORT'] || 9306 %>
+  host: <%= ENV['FLYING_SPHINX_HOST'] %>
+  port: <%= ENV['FLYING_SPHINX_PORT'] %>

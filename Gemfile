@@ -32,7 +32,7 @@ gem 'devise', '~> 4.9' # Devise authentication
 
 # Search
 gem 'thinking-sphinx' # Sphinx search integration
-
+gem 'flying-sphinx'
 # Redis (for Action Cable in production)
 gem 'redis', '~> 4.0'
 
