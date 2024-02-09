@@ -1,73 +1,77 @@
-source "https://rubygems.org"
+# frozen_string_literal: true
+
+source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.3.0"
+ruby '3.3.0'
 
-# Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.0.8"
+# Rails
+gem 'rails', '~> 7.0.8'
+gem 'sprockets-rails' # Asset pipeline for Rails
 
-# The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
-gem "sprockets-rails"
+# Database
+gem 'mysql2' # MySQL
+gem 'pg', '~> 1.1' # PostgreSQL
 
-# Use postgresql as the database for Active Record
-gem "pg", "~> 1.1"
+# Web Server
+gem 'puma', '~> 5.0' # Puma web server
 
-# Use the Puma web server [https://github.com/puma/puma]
-gem "puma", "~> 5.0"
-gem 'webpacker', '~> 5.x'
-gem 'react-rails'
-# Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
-gem "jsbundling-rails"
+# Frontend
+gem 'jsbundling-rails' # JavaScript bundling
+gem 'react-rails' # React integration
+gem 'stimulus-rails' # Hotwire's modest JavaScript framework
+gem 'tailwindcss-rails', '~> 2.3' # Tailwind CSS
+gem 'turbo-rails' # Hotwire's SPA-like page accelerator
+gem 'webpacker' # Webpack integration
 
-# Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem "turbo-rails"
+# API and Serialization
+gem 'jbuilder' # JSON APIs
+gem 'jsonapi-serializer' # JSON API serialization
+gem 'kaminari' # Pagination
 
-# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem "stimulus-rails"
+# Authentication
+gem 'devise', '~> 4.9' # Devise authentication
 
-# Build JSON APIs with ease [https://github.com/rails/jbuilder]
-gem "jbuilder"
+# Search
+gem 'flying-sphinx'
+gem 'thinking-sphinx' # Sphinx search integration
+# Redis (for Action Cable in production)
+gem 'redis', '~> 4.0'
 
-# Use Redis adapter to run Action Cable in production
-gem "redis", "~> 4.0"
+# Timezone data
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
-# Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
-# gem "kredis"
+# Performance
+gem 'bootsnap', require: false # Reduces boot times
 
-# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
-
-# Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", require: false
-
-# Use Sass to process CSS
-# gem "sassc-rails"
-
-# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
-
+# Development and Test
 group :development, :test do
-  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem 'byebug', platform: :mri
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'pry'
+  gem 'rspec-rails', '~> 3.5'
+  gem 'rubocop'
+  gem 'rubocop-capybara'
+  gem 'rubocop-factory_bot'
+  gem 'rubocop-rails'
+  gem 'rubocop-rspec'
 end
 
+# Development only
 group :development do
-  # Use console on exceptions pages [https://github.com/rails/web-console]
-  gem "web-console"
-
-  # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
-  # gem "rack-mini-profiler"
-
-  # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
-  # gem "spring"
+  gem 'dockerfile-rails', '>= 1.6'
+  gem 'erb_lint'
+  gem 'htmlbeautifier'
+  gem 'letter_opener'
+  gem 'web-console'
 end
 
+# Test only
 group :test do
-  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
-  gem "selenium-webdriver"
-
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'rails-controller-testing'
+  gem 'selenium-webdriver'
+  gem 'shoulda-matchers'
 end
