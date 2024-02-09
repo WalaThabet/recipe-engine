@@ -59,7 +59,7 @@ end
 Capybara.register_driver :selenium do |app|
   options = Selenium::WebDriver::Chrome::Options.new
   options.add_argument('--headless')
-  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options:)
 end
 
 Capybara.configure do |config|
