@@ -62,6 +62,7 @@ group :development do
   gem 'dockerfile-rails', '>= 1.6'
   gem 'erb_lint'
   gem 'htmlbeautifier'
+  gem 'letter_opener'
 end
 
 # Test only
